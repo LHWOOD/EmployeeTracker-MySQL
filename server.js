@@ -2,7 +2,7 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const chalk = require("chalk");
-const consoleTable = require("console.table");
+const cTable = require("console.table");
 
 //connection object
 const connection = mysql.createConnection({
@@ -13,7 +13,15 @@ const connection = mysql.createConnection({
   database: "tracker_db",
 });
 
+const test = () => {
+  connection.query("SELECT * FROM department", (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
+};
+
 connection.connect((err) => {
   if (err) throw err;
-  console.log(`connected as id ${connection.threadId}\n`);
+  console.log(chalk.blue(`connected as id ${connection.threadId}\n`));
+  test();
 });
