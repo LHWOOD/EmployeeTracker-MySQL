@@ -69,6 +69,14 @@ const start = () => {
     });
 };
 
+const viewAll = () => {
+  connection.query("SELECT * FROM employees", (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    start();
+  });
+};
+
 connection.connect((err) => {
   if (err) throw err;
   console.log(chalk.blue(`connected as id ${connection.threadId}\n`));
