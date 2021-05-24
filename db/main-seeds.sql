@@ -40,13 +40,13 @@ CREATE TABLE employee (
 
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-values ("June", "Bug", "1", "100"), 
-("Janine", "Von Bean", "2", "101"), 
-("Kate", "Bossman", "3", "110"), 
-("Addy", "Williams", "4", "111"), 
-("Bailey", "Wood", "5", "120"), 
-("Tupelo", "Honey", "6", "121"), 
-("Ellie", "Vader", "7", "130"), 
-("Sam", "McKay", "8", "131"), 
-("Margaret", "Cubs", "9", "140"), 
-("Glenna", "Hoots", "10", "141");
+values ("June", "Bug", "7", null), 
+("Janine", "Von Bean", "6", "101"), 
+("Kate", "Bossman", "1", null), 
+("Addy", "Williams", "2", "111"), 
+("Bailey", "Wood", "4", null), 
+("Tupelo", "Honey", "3", "121"), 
+("Ellie", "Vader", "3", "130"), 
+("Sam", "McKay", "2", "131"), 
+("Margaret", "Cubs", "5", "140"), 
+("Glenna", "Hoots", "6", "141");

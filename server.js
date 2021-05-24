@@ -6,7 +6,7 @@ const cTable = require("console.table");
 const mainScreen = [
   "View All Employees",
   "View All Employees By Department",
-  "View All Employees by Manager",
+  "View All Employees By Manager",
   "Add Employees",
   "Remove Employees",
   "Update Employee Role",
@@ -39,10 +39,10 @@ const start = () => {
         case "View All Employees":
           viewAll();
           break;
-        case "View All Employees by Department":
+        case "View All Employees By Department":
           viewByDept();
           break;
-        case "View All Employees by Manager":
+        case "View All Employees By Manager":
           viewByManager();
           break;
         case "Add Employees":
@@ -82,40 +82,42 @@ const viewAll = () => {
 };
 
 const viewByDept = () => {
-  connection.query("SELECT *", (err, res) => {
+  connection.query("SELECT * FROM department", (err, res) => {
     if (err) throw err;
+    console.table(res);
+    start();
   });
 };
 
-const viewByManager = () => {
-  connection.query("SELECT *", (err, res) => {
-    if (err) throw err;
-  });
-};
+// const viewByManager = () => {
+//   connection.query("SELECT *", (err, res) => {
+//     if (err) throw err;
+//   });
+// };
 
-const addEmployees = () => {
-  connection.query("SELECT *", (err, res) => {
-    if (err) throw err;
-  });
-};
+// const addEmployees = () => {
+//   connection.query("SELECT *", (err, res) => {
+//     if (err) throw err;
+//   });
+// };
 
-const removeEmployees = () => {
-  connection.query("SELECT *", (err, res) => {
-    if (err) throw err;
-  });
-};
+// const removeEmployees = () => {
+//   connection.query("SELECT *", (err, res) => {
+//     if (err) throw err;
+//   });
+// };
 
-const updateRole = () => {
-  connection.query("SELECT *", (err, res) => {
-    if (err) throw err;
-  });
-};
+// const updateRole = () => {
+//   connection.query("SELECT *", (err, res) => {
+//     if (err) throw err;
+//   });
+// };
 
-const updateManager = () => {
-  connection.query("SELECT *", (err, res) => {
-    if (err) throw err;
-  });
-};
+// const updateManager = () => {
+//   connection.query("SELECT *", (err, res) => {
+//     if (err) throw err;
+//   });
+// };
 
 const viewAllRoles = () => {
   connection.query("SELECT * FROM role", (err, res) => {
@@ -125,17 +127,17 @@ const viewAllRoles = () => {
   });
 };
 
-const addRoles = () => {
-  connection.query("SELECT *", (err, res) => {
-    if (err) throw err;
-  });
-};
+// const addRoles = () => {
+//   connection.query("SELECT *", (err, res) => {
+//     if (err) throw err;
+//   });
+// };
 
-const removeRole = () => {
-  connection.query("SELECT *", (err, res) => {
-    if (err) throw err;
-  });
-};
+// const removeRole = () => {
+//   connection.query("SELECT *", (err, res) => {
+//     if (err) throw err;
+//   });
+// };
 
 connection.connect((err) => {
   if (err) throw err;
