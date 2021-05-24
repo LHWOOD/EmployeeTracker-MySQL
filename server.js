@@ -81,6 +81,62 @@ const viewAll = () => {
   });
 };
 
+const viewByDept = () => {
+  connection.query("SELECT *", (err, res) => {
+    if (err) throw err;
+  });
+};
+
+const viewByManager = () => {
+  connection.query("SELECT *", (err, res) => {
+    if (err) throw err;
+  });
+};
+
+const addEmployees = () => {
+  connection.query("SELECT *", (err, res) => {
+    if (err) throw err;
+  });
+};
+
+const removeEmployees = () => {
+  connection.query("SELECT *", (err, res) => {
+    if (err) throw err;
+  });
+};
+
+const updateRole = () => {
+  connection.query("SELECT *", (err, res) => {
+    if (err) throw err;
+  });
+};
+
+const updateManager = () => {
+  connection.query("SELECT *", (err, res) => {
+    if (err) throw err;
+  });
+};
+
+const viewAllRoles = () => {
+  connection.query("SELECT * FROM role", (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    start();
+  });
+};
+
+const addRoles = () => {
+  connection.query("SELECT *", (err, res) => {
+    if (err) throw err;
+  });
+};
+
+const removeRole = () => {
+  connection.query("SELECT *", (err, res) => {
+    if (err) throw err;
+  });
+};
+
 connection.connect((err) => {
   if (err) throw err;
   console.log(chalk.blue(`connected as id ${connection.threadId}\n`));
