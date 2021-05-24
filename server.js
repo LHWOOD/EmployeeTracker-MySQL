@@ -14,6 +14,7 @@ const mainScreen = [
   "View All Roles",
   "Add Role",
   "Remove Role",
+  "Exit Program",
 ];
 
 //connection object
@@ -65,12 +66,15 @@ const start = () => {
         case "Remove Role":
           removeRole();
           break;
+        case "Exit Program":
+          connection.end();
+          break;
       }
     });
 };
 
 const viewAll = () => {
-  connection.query("SELECT * FROM employees", (err, res) => {
+  connection.query("SELECT * FROM employee", (err, res) => {
     if (err) throw err;
     console.table(res);
     start();

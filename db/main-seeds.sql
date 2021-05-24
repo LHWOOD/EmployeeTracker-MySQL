@@ -9,22 +9,44 @@ CREATE TABLE department (
   department_name VARCHAR(30)
 );
 
+INSERT INTO department (department_name)
+value
+("Sales"), ("Engineering"), ("Finance"), ("Legal");
+
 CREATE TABLE role (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(30),
   salary DECIMAL(8,2),
-  department_id INT,
-  FOREIGN KEY(department_id) REFERENCES department(id)
+  department_id INT
 );
+
+INSERT INTO role (title, salary, department_id)
+value
+("Sales Lead", 80000, 1), 
+("Salesperson", 60000, 1), 
+("Software Engineer", 85000, 2), 
+("Lead Engineer", 105000, 2), 
+("Accountant", 75000, 3), 
+("Lawyer", 90000, 4), 
+("Legal Team Lead", 110000, 4);
 
 CREATE TABLE employee (
   id INT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   role_id INT,
-  manager_id INT,
-  FOREIGN KEY(role_id) REFERENCES role(id),
-  FOREIGN KEY(manager_id) REFERENCES employee(id)
+  manager_id INT
 );
 
 
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+values ("June", "Bug", "1", "100"), 
+("Janine", "Von Bean", "2", "101"), 
+("Kate", "Bossman", "3", "110"), 
+("Addy", "Williams", "4", "111"), 
+("Bailey", "Wood", "5", "120"), 
+("Tupelo", "Honey", "6", "121"), 
+("Ellie", "Vader", "7", "130"), 
+("Sam", "McKay", "8", "131"), 
+("Margaret", "Cubs", "9", "140"), 
+("Glenna", "Hoots", "10", "141");
