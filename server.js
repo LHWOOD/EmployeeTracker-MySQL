@@ -129,10 +129,10 @@ const addRoles = () => {
         [answer.newRole, answer.salary, answer.deptid],
         (err, res) => {
           if (err) throw err;
-          console.table(res);
-          start();
         }
       );
+      viewRoles();
+      start();
     });
 };
 
