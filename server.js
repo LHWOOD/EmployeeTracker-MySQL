@@ -3,17 +3,15 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 const chalk = require("chalk");
 const cTable = require("console.table");
+
 const mainScreen = [
-  "View All Employees",
-  "View All Employees By Department",
-  "View All Employees By Manager",
-  "Add Employees",
-  "Remove Employees",
-  "Update Employee Role",
-  "Update Employee Manager",
+  "View All Departments",
   "View All Roles",
-  "Add Role",
-  "Remove Role",
+  "View All Employees",
+  "Add Departments",
+  "Add Roles",
+  "Add Employees",
+  "Update Employee Role",
   "Exit Program",
 ];
 
@@ -36,35 +34,26 @@ const start = () => {
     })
     .then((answer) => {
       switch (answer.main) {
+        case "View All Departments":
+          viewDepts();
+          break;
+        case "View All Roles":
+          viewRoles();
+          break;
         case "View All Employees":
-          viewAll();
+          viewEmployees();
           break;
-        case "View All Employees By Department":
-          viewByDept();
+        case "Add Departments":
+          addDepts();
           break;
-        case "View All Employees By Manager":
-          viewByManager();
+        case "Add Roles":
+          addRoles();
           break;
         case "Add Employees":
           addEmployees();
           break;
-        case "Remove Employees":
-          removeEmployees();
-          break;
         case "Update Employee Role":
-          updateRole();
-          break;
-        case "Update Employee Manager":
-          updateManager();
-          break;
-        case "View All Roles":
-          viewAllRoles();
-          break;
-        case "Add Role":
-          addRoles();
-          break;
-        case "Remove Role":
-          removeRole();
+          updateEmployeeRole();
           break;
         case "Exit Program":
           connection.end();
@@ -73,15 +62,7 @@ const start = () => {
     });
 };
 
-const viewAll = () => {
-  connection.query("SELECT * FROM employee", (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    start();
-  });
-};
-
-const viewByDept = () => {
+const viewDepts = () => {
   connection.query("SELECT * FROM department", (err, res) => {
     if (err) throw err;
     console.table(res);
@@ -89,37 +70,7 @@ const viewByDept = () => {
   });
 };
 
-// const viewByManager = () => {
-//   connection.query("SELECT *", (err, res) => {
-//     if (err) throw err;
-//   });
-// };
-
-// const addEmployees = () => {
-//   connection.query("SELECT *", (err, res) => {
-//     if (err) throw err;
-//   });
-// };
-
-// const removeEmployees = () => {
-//   connection.query("SELECT *", (err, res) => {
-//     if (err) throw err;
-//   });
-// };
-
-// const updateRole = () => {
-//   connection.query("SELECT *", (err, res) => {
-//     if (err) throw err;
-//   });
-// };
-
-// const updateManager = () => {
-//   connection.query("SELECT *", (err, res) => {
-//     if (err) throw err;
-//   });
-// };
-
-const viewAllRoles = () => {
+const viewRoles = () => {
   connection.query("SELECT * FROM role", (err, res) => {
     if (err) throw err;
     console.table(res);
@@ -127,13 +78,81 @@ const viewAllRoles = () => {
   });
 };
 
-// const addRoles = () => {
-//   connection.query("SELECT *", (err, res) => {
-//     if (err) throw err;
-//   });
-// };
+const viewEmployees = () => {
+  connection.query("SELECT * FROM employee", (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    start();
+  });
+};
 
-// const removeRole = () => {
+const addDepts = () => {
+  inquirer
+    .prompt({
+      type: "input",
+      name: "newDept",
+      message: "What Department would you like to add?",
+    })
+    .then(function (answer) {
+      connection.query(
+        "INSERT INTO department (name) VALUES (?)",
+        [answer.newDept],
+        function (err, res) {
+          if (err) throw err;
+          console.table(res);
+          start();
+        }
+      );
+    });
+};
+
+const addRoles = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "newRole",
+        message: "What is the Role you would like to add?",
+      },
+      {
+        type: "input",
+        name: "salary",
+        message: "What is the Salary for this role?",
+      },
+      {
+        type: "input",
+        name: "deptid",
+        message: "What is the Deptment ID for this role?",
+      },
+    ])
+    .then(function (answer) {
+      connection.query(
+        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
+        [answer.newRole, answer.salary, answer.deptid],
+        (err, res) => {
+          if (err) throw err;
+          console.table(res);
+          start();
+        }
+      );
+    });
+};
+
+const addEmployees = () => {
+  connection.query("SELECT *", (err, res) => {
+    if (err) throw err;
+  });
+};
+
+// const updateEmployeeRole = () => {
+//   inquirer
+//   .prompt([
+//     {
+//       type: "input",
+//       name: "empUpdate",
+//       message: "Which employee are we updating?"
+//     }
+//   ])
 //   connection.query("SELECT *", (err, res) => {
 //     if (err) throw err;
 //   });
@@ -141,6 +160,7 @@ const viewAllRoles = () => {
 
 connection.connect((err) => {
   if (err) throw err;
-  console.log(chalk.blue(`connected as id ${connection.threadId}\n`));
+  console.log(chalk.blue(`connected at id ${connection.threadId}\n`));
+  console.log(chalk.red(`\n EMPLOYEE TRACKER\n`));
   start();
 });
