@@ -93,16 +93,14 @@ const addDepts = () => {
       name: "newDept",
       message: "What Department would you like to add?",
     })
-    .then(function (answer) {
-      connection.query(
-        "INSERT INTO department (name) VALUES (?)",
-        [answer.newDept],
-        function (err, res) {
-          if (err) throw err;
-          console.table(res);
-          start();
-        }
-      );
+    .then(function (res) {
+      const department = res.newDept;
+      const query = `INSERT INTO department (name) VALUES("${department}")`;
+      connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        start();
+      });
     });
 };
 
