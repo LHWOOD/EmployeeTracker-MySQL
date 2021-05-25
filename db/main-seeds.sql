@@ -38,7 +38,6 @@ CREATE TABLE employee (
   manager_id INT
 );
 
-
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 values ("June", "Bug", "7", null), 
 ("Janine", "Von Bean", "6", "101"), 
