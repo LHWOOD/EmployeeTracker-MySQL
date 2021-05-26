@@ -26,7 +26,8 @@ EmployeeTracker utilizes Node.js, Inquirer, and MySQL.
 
 ## Usage
 
-Coming Soon!
+Here is a link to a demonstration video:
+https://drive.google.com/file/d/1EgmPQ2b9XCpISrt7mjJRtKhZYNjhipjJ/view?usp=sharing
 
 ## Contributing
 
