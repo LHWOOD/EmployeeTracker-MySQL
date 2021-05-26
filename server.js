@@ -93,14 +93,16 @@ const addDepts = () => {
       name: "newDept",
       message: "What Department would you like to add?",
     })
-    .then(function (res) {
-      const department = res.newDept;
-      const query = `INSERT INTO department (name) VALUES("${department}")`;
-      connection.query(query, function (err, res) {
-        if (err) throw err;
-        console.table(res);
-        start();
-      });
+    .then(function (answer) {
+      connection.query(
+        "INSERT INTO department (department_name) VALUES (?)",
+        [answer.newDept],
+        (err, res) => {
+          if (err) throw err;
+        }
+      );
+      viewDepts();
+      start();
     });
 };
 
@@ -137,9 +139,40 @@ const addRoles = () => {
 };
 
 const addEmployees = () => {
-  connection.query("SELECT *", (err, res) => {
-    if (err) throw err;
-  });
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "firstName",
+        message: "What is the employee's first name?",
+      },
+      {
+        type: "input",
+        name: "lastName",
+        message: "What is the employee's last name?",
+      },
+      {
+        type: "input",
+        name: "roleID",
+        message: "What is the employee's role ID?",
+      },
+      {
+        type: "input",
+        name: "manID",
+        message: "What is the employee's manager ID?",
+      },
+    ])
+    .then(function (answer) {
+      connection.query(
+        "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+        [answer.firstName, answer.lastName, answer.roleID, answer.manID],
+        (err, res) => {
+          if (err) throw err;
+        }
+      );
+      viewEmployees();
+      start();
+    });
 };
 
 // const updateEmployeeRole = () => {
